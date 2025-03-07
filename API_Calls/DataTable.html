@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- DataTables CSS & JS -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css"
+    />
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+  </head>
+  <body>
+    <table id="myTable" class="diaplay">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Email</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td>Karan Singh</td>
+          <td>karan@google.com</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>Raj Singh</td>
+          <td>raj@google.com</td>
+        </tr>
+      </tbody>
+    </table>
+  </body>
+
+  <script>
+    $(document).ready(function () {
+      $("#myTable").DataTable();
+    });
+
+    // Data fetching directly form the server
+
+    $(document).ready(function () {
+      $("#myTable").DataTable({
+        ajax: "data.json",
+        columns: [{ data: "id" }, { data: "name" }, { data: "email" }],
+      });
+    });
+
+    $(document).ready(function () {
+      $("#myTable").DataTable({
+        dom: "Bfrtip",
+        buttons: ["copy", "csv", "excel", "pdf", "print"],
+      });
+    });
+  </script>
+</html>

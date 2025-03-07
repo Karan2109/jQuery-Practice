@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fetching Data Using API in jQuery</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+
+</head>
+<body>
+    <img class="picture">
+    <h1 class="first"></h1>
+    <h1 class="last"></h1>
+    
+</body>
+
+<script>
+    // Fetching data using API in jQuery
+    $(document).ready(function() {
+        console.log("Data Is Loading...");
+
+        // const apiUrl = "https://api.example.com/users";
+        const apiUrl = "https://randomuser.me/api/";
+
+        // $.get(apiUrl, function(data) {
+        //     console.log(data);
+        // })
+
+        $.ajax({
+            url: apiUrl,
+            method: "GET",
+            dataType: "json",
+            success: (data) => {
+                console.log(data);             
+                console.log(data.info);             
+                console.log(data.results);      
+                
+                for (let i = 0; i < data.results.length; i++) {
+                    let user = data.results[i];
+                    console.log(user);
+                    $(".first").html(user.name.first);
+                    $(".first").css("background", "blue").slideUp(1000).slideDown(1000);
+
+                    $(".last").html(user.name.last);
+                    $(".last").css("background", "blue").slideUp(1000).slideDown(1000);
+
+                    $(".picture").attr("src", user.picture.large);
+                    $(".picture").css("border-radius", "50%");
+                    $(".picture").css("width", "200px");
+                    $(".picture").animate({ left: "250px", opacity: "0.4" }, 1000);
+
+                    $(".first").css("background-color", "cyan");
+                    $(".last").css("background-color", "yellow");
+
+                    $(".first").addClass("firstname");
+                    $(".last").addClass("lastname");
+
+                    $(".firstname").css("color", "red");
+                    $(".lastname").css("color", "blue");
+                }
+            },
+            error: (err) => {
+                console.log(err);
+            }
+        })
+
+    });
+</script>
+
+</html>
